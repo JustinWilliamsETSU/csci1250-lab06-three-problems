@@ -29,13 +29,13 @@ do
     System.Console.WriteLine("2. The Dice Table");
     System.Console.WriteLine("3. The Score Report");
     System.Console.WriteLine("4. All Three");
-    System.Console.WriteLine("5. Quit Program");
+    System.Console.WriteLine("5. Quit");
 
     // Prompts the user for a selection.
     System.Console.Write("Choose 1 through 5: ");
     choice = Convert.ToInt32(Console.ReadLine());
 
-    // A while loop is used here to continually prompt the user for a valid number if their input is not within bounds.
+    // While is used because we don't know the number of times a person is going to run through the options, and runs indefinitely until 5 is selected.
     while (choice > 5 || choice < 1)
     {
         System.Console.WriteLine("Choose a number from 1 to 5.");
@@ -58,6 +58,7 @@ do
             System.Console.Write("Score: ");
             grade = Convert.ToInt32(Console.ReadLine());
         }
+
         // Calculates the grade if it is an accepted value. I used if and else/if here so I could have each range and cw nested on its own.
         if (grade < 60)
         {
@@ -85,7 +86,7 @@ do
     {
         System.Console.WriteLine("\n=== Exercise 2: The Dice Table ===");
 
-        // Same as before. A while loop here will continue to generate rolls for the user as long as they keep responding with Y.
+        // Same as before. A while loop here (line 95) will continue to generate rolls for the user as long as they keep responding with Y.
         // Additionally, the variables being set here allows us to re-enter the menu later on.
         rollAgain = "y";
         rollNumber = 1;
@@ -121,6 +122,7 @@ do
             System.Console.Write("Roll again? (y/n) ");
             rollAgain = System.Console.ReadLine();
 
+            // If the user responds with a yes, it iterates the count for the number of rolls. Otherwise (including n) it exits. Since rollAGain no longer equals y, it exits the while loop and moves on.
             if (rollAgain == "y")
             {
                 rollNumber++;
@@ -137,6 +139,46 @@ do
     if (choice == 3 || choice == 4)
     {
         // Exercise 3
+        System.Console.WriteLine("\n=== Exercise 3: The Score Report ===");
+
+        int[] scores = new int[5];
+
+        // for i in range will iterate through the array, collecting user input for only the number of entries in the array, which we defined as 5 above.
+        for (int i = 0; i < scores.Length; i++)
+        {
+            System.Console.Write("Score " + (i + 1).ToString() + ": ");
+            scores[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        System.Console.WriteLine();
+
+        int totalScore = 0;
+        int highestScore = scores[0];
+        int passingCount = 0;
+
+        // I use a for each loop here to iterate through each score in the array.
+        foreach (int score in scores)
+        {
+            totalScore += score;
+
+            if (score > highestScore)
+            {
+                highestScore = score;
+            }
+
+            if (score >= 60)
+            {
+                passingCount++;
+            }
+        }
+
+        double averageScore = (double)totalScore / scores.Length;
+
+        System.Console.WriteLine("Scores entered: " + scores.Length.ToString());
+        System.Console.WriteLine("Total: " + totalScore.ToString());
+        System.Console.WriteLine("Average: " + averageScore.ToString("F1"));
+        System.Console.WriteLine("Highest: " + highestScore.ToString());
+        System.Console.WriteLine("Passing: " + passingCount.ToString() + " of " + scores.Length.ToString());
     }
 
 } while (choice != 5);
