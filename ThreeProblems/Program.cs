@@ -10,6 +10,7 @@
 
 // Initial variables to be used throughout the program.
 int choice = 0;
+int grade = 0;
 
 do
 {
@@ -39,6 +40,39 @@ do
     if (choice == 1 || choice == 4)
     {
         // Exercise 1
+        System.Console.WriteLine("\n=== Exercise 1: The Grade Checker ===");
+        System.Console.Write("Score: ");
+        grade = Convert.ToInt32(Console.ReadLine());
+        
+        // A while loop is also used here to continually prompt the user for a valid number if their input is not within bounds, just like the main menu.
+        while (grade > 100 || grade < 0)
+        {
+            // Reprompts the user if the value is not valid. Asking for their input again here prevents an infinite loop, since otherwise it would just continually output "A score must be between 0 and 100" until the console is killed.
+            System.Console.WriteLine("A score must be between 0 and 100.");
+            System.Console.Write("Score: ");
+            grade = Convert.ToInt32(Console.ReadLine());
+        }
+        // Calculates the grade if it is an accepted value. I used if and else/if here so I could have each range and cw nested on its own.
+        if (grade < 60)
+        {
+            System.Console.WriteLine(grade.ToString() + " earns an F.");
+        }
+        else if (grade >= 60 && grade < 70)
+        {
+            System.Console.WriteLine(grade.ToString() + " earns a D.");
+        }
+        else if (grade >= 70 && grade < 80)
+        {
+            System.Console.WriteLine(grade.ToString() + " earns a C.");
+        }
+        else if (grade >= 80 && grade < 90)
+        {
+            System.Console.WriteLine(grade.ToString() + " earns a B.");
+        }
+        else if (grade >= 90 && grade < 101)
+        {
+            System.Console.WriteLine(grade.ToString() + " earns an A.");
+        }
     }
 
     if (choice == 2 || choice == 4)
