@@ -9,8 +9,14 @@
  */
 
 // Initial variables to be used throughout the program.
+using System.Linq.Expressions;
+
 int choice = 0;
 int grade = 0;
+int rollNumber = 1;
+string rollAgain = "y";
+int wins = 0;
+Random rng = new Random(4000);
 
 do
 {
@@ -77,7 +83,55 @@ do
 
     if (choice == 2 || choice == 4)
     {
-        // Exercise 2
+        System.Console.WriteLine("\n=== Exercise 2: The Dice Table ===");
+
+        // Same as before. A while loop here will continue to generate rolls for the user as long as they keep responding with Y.
+        // Additionally, the variables being set here allows us to re-enter the menu later on.
+        rollAgain = "y";
+        rollNumber = 1;
+        wins = 0;
+
+        while (rollAgain == "y")
+        {
+            // Exercise 2
+            int roll1 = rng.Next(1,7);
+            int roll2 = rng.Next(1,7);
+            int total = roll1 + roll2;
+
+            // Write is used here instead of WriteLine so I can check the result and print out anything special like snake eyes on the same line.
+            System.Console.Write("Roll " + rollNumber.ToString() + ": " + roll1.ToString() + " and " + roll2.ToString() + ", total " + total.ToString() + ". ");
+            if (roll1 == roll2 && total == 2)
+            {
+                System.Console.WriteLine("Snake eyes.");
+            }
+            else if (roll1 == roll2 && total != 2)
+            {
+                System.Console.WriteLine("Doubles!");
+            }
+            else if (total == 7 || total == 11)
+            {
+                System.Console.WriteLine("A winner.");
+                wins++;
+            }
+            else
+            {
+                System.Console.WriteLine();
+            }
+
+            System.Console.Write("Roll again? (y/n) ");
+            rollAgain = System.Console.ReadLine();
+
+            if (rollAgain == "y")
+            {
+                rollNumber++;
+            }
+            else
+            {
+                System.Console.WriteLine("You rolled " + rollNumber.ToString() + " times and won " + wins.ToString() + ".");
+            }
+        }
+
+        
     }
 
     if (choice == 3 || choice == 4)
